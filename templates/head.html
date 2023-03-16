@@ -1,3 +1,6 @@
+<!--정적 파일 호출-->
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <title>Pragmatic</title>
@@ -8,4 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+    <!--    default css link-->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
 </head>

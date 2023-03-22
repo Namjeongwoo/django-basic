@@ -6,7 +6,7 @@
     <div class="mt-4">
         <h4>Quit</h4>
     </div>
-    <form action="{% url 'accountapp:delete' pk=user.pk %}" method="POST">
+    <form action="{% url 'accountapp:delete' pk=target_user.pk %}" method="POST">
         {% csrf_token %}
         <!--{{ form }}-->
         {% bootstrap_form form %}

@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
+from articleapp import models
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
@@ -57,3 +58,11 @@ class ArticleDeleteView(DeleteView):
     template_name = 'articleapp/delete.html'
 
 
+class ArticleListView(ListView):
+    models = Article
+    context_object_name = 'article_list'
+    template_name = 'articleapp/list.html'
+    paginate_by = 4 # 한페이지 당 글 개수
+
+    def get_queryset(self):
+        return models.Article.objects.order_by('create_at')

@@ -1,23 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
 
-    <h1>
+  <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+
+    <img src="{{ target_project.image.url }}"
+         style="height: 12rem; width: 12rem; border-radius: 10rem; margin-bottom: 2rem; object-fit:cover;">
+
+    <h2 style="font-family: 'NanumSquareB'">
       {{ target_project.title }}
-    </h1>
-    <h5>
-      {{ target_project.writer.profile.nickname }}
-    </h5>
-    <hr>
+    </h2>
 
-    <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"
-            src="{{ target_project.image.url }} " alt="">
-
-    <p>
+    <h5 style="margin-bottom:3rem;">
       {{ target_project.description }}
-    </p>
+    </h5>
+
+
+
+<!--  <div style="text-align: center; max-width: 700px; margin: 4rem auto;">-->
+
+<!--    <h1>-->
+<!--      {{ target_project.title }}-->
+<!--    </h1>-->
+<!--    <h5>-->
+<!--      {{ target_project.writer.profile.nickname }}-->
+<!--    </h5>-->
+<!--    <hr>-->
+
+<!--    <img style="width: 100%; border-radius: 1rem; margin: 2rem 0;"-->
+<!--            src="{{ target_project.image.url }} " alt="">-->
+
+<!--    <p>-->
+<!--      {{ target_project.description }}-->
+<!--    </p>-->
+
+<!--  </div>-->
+  </div>
+  <div>
+    {% include 'snippets/list_fragment.html' with article_list=object_list %}
 
   </div>
+
+
+
 
 {% endblock %}

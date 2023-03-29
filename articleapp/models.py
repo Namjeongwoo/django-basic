@@ -1,12 +1,17 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from projectapp.models import Project
+
 
 # Create your models here.
 
 class Article(models.Model):
     # 작성자
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='article', null=True)
+
+    # 프로젝트
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name='article', null=True)
 
     # 타이틀
     title = models.CharField(max_length=200, null=True)

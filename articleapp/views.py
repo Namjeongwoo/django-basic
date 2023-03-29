@@ -65,7 +65,7 @@ class ArticleListView(ListView):
     models = Article
     context_object_name = 'article_list'
     template_name = 'articleapp/list.html'
-    paginate_by = 4 # 한페이지 당 글 개수
+    paginate_by = 5 # 한페이지 당 글 개수
 
     def get_queryset(self):
         return models.Article.objects.order_by('create_at')

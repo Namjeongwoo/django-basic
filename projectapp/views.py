@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.views.generic.list import MultipleObjectMixin
 
 from articleapp.models import Article
 from projectapp import models
+from projectapp.decorators import project_ownership_required
 from projectapp.forms import ProjectCreationForm
 from projectapp.models import Project
 from subscribeapp.models import Subscription
@@ -61,3 +62,27 @@ class ProjectListView(ListView):
 
     def get_queryset(self):
         return models.Project.objects.order_by('created_at')
+
+
+
+@method_decorator(project_ownership_required, 'get')
+@method_decorator(project_ownership_required, 'post')
+class ProjectUpdateView(UpdateView):
+    model = Project
+    form_class = ProjectCreationForm
+    context_object_name = 'target_project'
+    template_name = 'projectapp/update.html'
+
+
+
+    def get_success_url(self):
+        return reverse('projectapp:detail', kwargs={'pk': self.object.pk})
+
+
+@method_decorator(project_ownership_required, 'get')
+@method_decorator(project_ownership_required, 'post')
+class ProjectDeleteView(DeleteView):
+    model = Project
+    context_object_name = 'target_project'
+    success_url = reverse_lazy('projectapp:list')
+    template_name = 'articleapp/delete.html'

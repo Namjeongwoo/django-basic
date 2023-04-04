@@ -19,3 +19,7 @@ class Project(models.Model):
     # 생성 일시
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
+    def __str__(self):
+
+        return f'{self.pk} : {self.title}'
+
